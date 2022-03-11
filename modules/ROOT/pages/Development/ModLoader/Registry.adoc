@@ -29,17 +29,17 @@ that allow you to easily add your own key bindings and axis bindings to the game
 https://docs.unrealengine.com/en-US/InteractiveExperiences/Input/index.html?utm_source=editor&utm_medium=docs[ActionMappings]
 and AxisMappings system.
 
-Since we don't have direct access to the Satisfactory project file, we can't add them directly to
-Project Settings > Engine > Input > Bindings, so instead we add them through this SML registry.
+Since we don't have direct access to the Satisfactory project file, we can't add them directly to the
+Project Settings, so instead we add them through this SML registry.
 
 Users of your mod can edit these keybinds from the in-game keybindings screen in the options.
 Your keybinds will show up with the given display name grouped in a category with your mod's name,
 and their set values will persist between sessions of the game.
 
 In order to get the keybinds to show up correctly inside the Blueprint editor,
-you may still have to add them to the Bindings section described above.
+you will still have to add them to the Bindings section found at Project Settings > Engine > Input > Bindings.
 
-Once the keybinds are set up, they should show up when you type their name into the new node dialog.
+Once the keybinds are set up, they should show up when you type their name into the new node dialog, provided you are in a blueprint derived from a class that can receive input calls.
 For example, if you named a keybind `DocMod.DebugPrint` then you can search
 `DocMod.DebugPrint` and the node for the DocMod.DebugPrint Action Event will show up.
 
@@ -50,6 +50,10 @@ prefix to avoid conflicts with other mods.
 This function will throw an exception if the action name doesn't start with the prefix described above.
 You can only register two keys with the same name.
 One of them should be a keyboard action and another is a gamepad action (optional).
+
+To register a key binding within Blueprints, simply add it to the ```Mod Key Bindings``` property of your mod's Game Instance Module.
+
+image::ModLoader/Registry_BlueprintKeybindRegistryExample.png[image]
 
 === `RegisterModAxisBind(String ModReference, InputAxisKeyMapping PositiveAxisMapping, InputAxisKeyMapping NegativeAxisMapping, Text PositiveDisplayName, Text NegativeDisplayName)`
 Registers the given axis key mappings and associate them with the given mod reference.
